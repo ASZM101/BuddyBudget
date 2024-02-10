@@ -1,13 +1,20 @@
 import SwiftUI
 
 struct NewEntry: View {
+    // Shared instance of the APIManager
     let apiManager = APIManager.shared
+    
+    // Environment variable to dismiss the view
     @Environment(\.dismiss) private var dismiss
+    
+    // Binding variables for budget, withdrawals, deposits, expense flag, and entries
     @Binding var budget: Double
     @Binding var withdrawals: Double
     @Binding var deposits: Double
     @Binding var isExpense: Bool
     @Binding var entries: [String]
+    
+    // State variables for description, amount, amount string, and background colors
     @State var description: String = ""
     @State var amount: Double = 0.0
     @State var amountStr: String = ""
@@ -21,6 +28,8 @@ struct NewEntry: View {
                     .padding()
                 Spacer()
                     .frame(maxHeight: 75)
+                
+                // Text field for description
                 TextField("Description", text: $description)
                     .padding()
                     .background(Color(dBkgd))
@@ -28,6 +37,8 @@ struct NewEntry: View {
                     .padding()
                     .padding(.leading)
                     .padding(.trailing)
+                
+                // Text field for amount
                 TextField("Amount", text: $amountStr)
                     .padding()
                     .background(Color(aBkgd))
@@ -38,49 +49,66 @@ struct NewEntry: View {
                     .keyboardType(.decimalPad)
                 Spacer()
                     .frame(maxHeight: 25)
-                    Button{
-                        amount = Double(amountStr) ?? 0.0
-                        if(description == "") {
-                            dBkgd = "lightRed"
-                        } else {
-                            dBkgd = "lightGrey"
-                        }
-                        if(amount == 0.0) {
-                            aBkgd = "lightRed"
-                        } else {
-                            aBkgd = "lightGrey"
-                        }
-                        if(description != "" && amount != 0.0){
-                            print("\(APIManager.bearer)")
-                            if(isExpense) {
-                                withdrawals += amount
-                                budget -= amount
-                            } else {
-                                deposits += amount
-                                budget += amount
-                            }
-                            entries.append((isExpense ? "- $" : "+ $") + String(amount) + " (01/28/2024) " + description)
-                            
-                            var am = amount;
-                            if (isExpense) {
-                                am *= -1
-                            }
-                            apiManager.transaction(forWhat: description, amount: am)
-                            dismiss()
-                        }
-                    } label: {
-                        HStack {
-                            Spacer()
-                            Text("Add Entry")
-                            Spacer()
-                        }
-                        .frame(width: 150)
+                
+                // Button to add entry
+                Button{
+                    amount = Double(amountStr) ?? 0.0
+                    
+                    // Check for empty description
+                    if(description == "") {
+                        dBkgd = "lightRed"
+                    } else {
+                        dBkgd = "lightGrey"
                     }
-                        .padding()
-                        .background(.blue)
-                        .foregroundColor(.white)
-                        .clipShape(.capsule)
-                        .padding()
+                    
+                    // Check for zero amount
+                    if(amount == 0.0) {
+                        aBkgd = "lightRed"
+                    } else {
+                        aBkgd = "lightGrey"
+                    }
+                    
+                    // If both description and amount are valid, add the entry
+                    if(description != "" && amount != 0.0){
+                        print("\(APIManager.bearer)")
+                        
+                        // Update budget, withdrawals, and deposits based on the entry
+                        if(isExpense) {
+                            withdrawals += amount
+                            budget -= amount
+                        } else {
+                            deposits += amount
+                            budget += amount
+                        }
+                        
+                        // Append the entry to the entries array
+                        entries.append((isExpense ? "- $" : "+ $") + String(amount) + " (01/28/2024) " + description)
+                        
+                        // Adjust the amount for expenses (negative)
+                        var am = amount;
+                        if (isExpense) {
+                            am *= -1
+                        }
+                        
+                        // Call APIManager to record the transaction
+                        apiManager.transaction(forWhat: description, amount: am)
+                        
+                        // Dismiss the view
+                        dismiss()
+                    }
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Add Entry")
+                        Spacer()
+                    }
+                    .frame(width: 150)
+                }
+                .padding()
+                .background(.blue)
+                .foregroundColor(.white)
+                .clipShape(.capsule)
+                .padding()
                 Spacer()
                     .frame(maxHeight: 25)
             }

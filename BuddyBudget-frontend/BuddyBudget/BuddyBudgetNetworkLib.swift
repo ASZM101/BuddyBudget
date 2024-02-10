@@ -1,11 +1,13 @@
 import SwiftUI
 import Combine
 
+// Model representing a financial transaction
 struct Transaction {
     let timestamp: any UnsignedInteger
     let name: String
     let amount: Double
     
+    // Factory method to create a Transaction from a string
     static func from_str(s: String) -> Transaction {
         let splits = s.split(separator: ":")
         if
@@ -19,10 +21,16 @@ struct Transaction {
         }
     }
 }
+
+// Manager for API-related functionalities
 class APIManager {
+    // Shared instance of the APIManager
     static let shared = APIManager()
+    
+    // Bearer token for authentication
     static var bearer = "bearer_nullBearer"
     
+    // Convert a timestamp to a formatted string
     func as_converted(timestamp: TimeInterval, format: String) -> String {
         let date = Date(timeIntervalSince1970: timestamp)
         let fmt = DateFormatter()
@@ -30,6 +38,8 @@ class APIManager {
         
         return fmt.string(from: date)
     }
+    
+    // Drop all transactions associated with the current bearer
     func drop_all() {
         guard let url = URL(string: "http://localhost:8000/dump/\(APIManager.bearer)") else {
             print("Invalid URL")
@@ -46,10 +56,12 @@ class APIManager {
                 return
             }
             if let _res = response as? HTTPURLResponse {
-                //ok :thumbsup:
+                // Operation successful
             }
         }.resume()
     }
+    
+    // Record a transaction with a description and amount
     func transaction(forWhat: String, amount: Double) {
         guard let url = URL(string: "http://localhost:8000/transact") else {
             print("Invalid URL")
@@ -73,6 +85,7 @@ class APIManager {
         }.resume()
     }
     
+    // Retrieve transactions associated with the current bearer
     func get_transactions(completion: @escaping ([Transaction]) -> Void) {
         guard let url = URL(string: "http://localhost:8000/transactions/\(APIManager.bearer)") else {
             print("Invalid URL")

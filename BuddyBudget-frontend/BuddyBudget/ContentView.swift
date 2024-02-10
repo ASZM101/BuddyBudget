@@ -1,22 +1,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Create an instance of the shared APIManager
     let apiManager = APIManager.shared
+    
+    // State variables to track budget, withdrawals, deposits, expense/income flag, entries, and clear flag
     @State var budget: Double = 0.0
     @State var withdrawals: Double = 0.0
     @State var deposits: Double = 0.0
     @State var isExpense: Bool = false
     @State var entries = [""]
     @State var clear = false
-     
+    
     var body: some View {
+        // Main navigation view
         NavigationView {
             VStack {
+                // Display balance and fetch transactions on view appear
                 Text("Balance: $" + String(budget))
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
                     .padding()
                     .onAppear() {
+                        // Fetch transactions from APIManager
                         print("appearing")
                         apiManager.get_transactions {
                             transactions in
@@ -43,6 +49,8 @@ struct ContentView: View {
                             budget = deposits - withdrawals
                         }
                     }
+                
+                // Display progress bar, withdrawn and deposited amounts
                 ProgressView(value: withdrawals, total: deposits)
                     .progressViewStyle(.linear)
                     .padding()
@@ -57,6 +65,7 @@ struct ContentView: View {
                 .padding()
                 .multilineTextAlignment(.center)
                 
+                // Display the list of entries or a message if there are no entries
                 List {
                     
                     if entries[0] == "" && entries.count == 1 {
@@ -76,13 +85,18 @@ struct ContentView: View {
                 .onAppear() {
                     print("\(entries.count)")
                 }
+                
+                // Horizontal stack with navigation links and buttons for adding, clearing, and viewing articles
                 HStack {
+                    // Navigation link to add a new expense
                     NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(true), entries: $entries)) {
                         Image(systemName: "minus.circle.fill")
                             .font(.system(size: 50))
                             .foregroundColor(.red)
                     }
                     Spacer()
+                    
+                    // Button to clear all entries with an alert confirmation
                     Button {
                         clear = true
                     } label: {
@@ -103,12 +117,16 @@ struct ContentView: View {
                         }
                     }
                     Spacer()
+                    
+                    // Navigation link to view articles
                     NavigationLink(destination: Article()) {
                         Image(systemName: "book.closed.fill")
                             .font(.system(size: 50))
                             .foregroundColor(.blue)
                     }
                     Spacer()
+                    
+                    // Navigation link to add a new income
                     NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(false), entries: $entries)) {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 50))
@@ -119,12 +137,14 @@ struct ContentView: View {
             }
             .padding()
             .onAppear() {
+                // Update the budget on view appear
                 budget = deposits - withdrawals
             }
         }
     }
 }
 
+// Preview the ContentView
 #Preview {
     ContentView()
 }
