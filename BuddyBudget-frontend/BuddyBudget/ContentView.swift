@@ -17,7 +17,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 // Display balance and fetch transactions on view appear
-                Text("Balance: $" + String(budget))
+                Text("Balance: $" + String(String(format: "%.2f", round(budget * 100) / 100.0)))
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
                     .padding()
@@ -56,10 +56,10 @@ struct ContentView: View {
                     .padding()
                     .tint(.yellow)
                 HStack {
-                    Text("$" + String(withdrawals) + "\nwithdrawn")
+                    Text("$" + String(String(format: "%.2f", round(withdrawals * 100) / 100.0)) + "\nwithdrawn")
                         .font(.title3.weight(.semibold))
                     Spacer()
-                    Text("$" + String(deposits) + "\ndeposited")
+                    Text("$" + String(String(format: "%.2f", round(deposits * 100) / 100.0)) + "\ndeposited")
                         .font(.title3.weight(.semibold))
                 }
                 .padding()

@@ -351,6 +351,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct1 ? "000000" : "FFFFFF"))
                                 .background(Color(correct1 ? "A6FF91" : "007FFF"))
@@ -383,6 +384,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct2 ? "000000" : "FFFFFF"))
                                 .background(Color(correct2 ? "A6FF91" : "007FFF"))
@@ -415,6 +417,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct3 ? "000000" : "FFFFFF"))
                                 .background(Color(correct3 ? "A6FF91" : "007FFF"))
@@ -447,6 +450,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct4 ? "000000" : "FFFFFF"))
                                 .background(Color(correct4 ? "A6FF91" : "007FFF"))
@@ -618,8 +622,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
-                                
-                                
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct1 ? "000000" : "FFFFFF"))
                                 .background(Color(correct1 ? "A6FF91" : "007FFF"))
@@ -652,8 +655,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
-                                
-                                
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct2 ? "000000" : "FFFFFF"))
                                 .background(Color(correct2 ? "A6FF91" : "007FFF"))
@@ -686,8 +688,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
-                                
-                                
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct3 ? "000000" : "FFFFFF"))
                                 .background(Color(correct3 ? "A6FF91" : "007FFF"))
@@ -720,8 +721,7 @@ struct Quiz: View {
                                     print("\(correctCount)/\(qsAnswered)")
                                 }
                                 .frame(width: UIScreen.main.bounds.width * 3/4)
-                                
-                                
+                                .font(.system(size: 25))
                                 .padding(.all, 10.0)
                                 .tint(Color(correct4 ? "000000" : "FFFFFF"))
                                 .background(Color(correct4 ? "A6FF91" : "007FFF"))
@@ -739,16 +739,16 @@ struct Quiz: View {
                                         Button {
                                             dismiss()
                                         } label: {
-                                            Text("\(correctCount)/\(qsAnswered) Correct")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(Color("000000"))
-                                            Spacer()
+                                            Text("←")
+                                                .font(.system(size: 30))
+                                                .foregroundColor(Color("007FFF"))
                                             Text("Article")
                                                 .font(.system(size: 20))
                                                 .foregroundColor(Color("007FFF"))
-                                            Text("➔")
-                                                .font(.system(size: 30))
-                                                .foregroundColor(Color("007FFF"))
+                                            Spacer()
+                                            Text("\(correctCount)/\(qsAnswered) Correct")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color("000000"))
                                         }
                                     }
                                 } else if wrong == true {

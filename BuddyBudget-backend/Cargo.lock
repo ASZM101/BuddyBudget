@@ -3,6 +3,15 @@
 version = 3
 
 [[package]]
+name = "BuddyBudget"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "rand",
+ "rocket",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1263,15 +1272,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
-]
-
-[[package]]
-name = "BuddyBudget"
-version = "0.1.0"
-dependencies = [
- "async-trait",
- "rand",
- "rocket",
 ]
 
 [[package]]
