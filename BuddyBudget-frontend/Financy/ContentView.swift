@@ -84,8 +84,8 @@ struct ContentView: View {
                     print("\(entries.count)")
                 }
                 HStack {
-                    NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(false), entries: $entries)) {
-                        Image(systemName: "plus.circle.fill")
+                    NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(true), entries: $entries)) {
+                        Image(systemName: "minus.circle.fill")
                             .font(.system(size: 50))
                             .foregroundColor(.red)
                     }
@@ -116,8 +116,8 @@ struct ContentView: View {
                             .foregroundColor(.blue)
                     }
                     Spacer()
-                    NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(true), entries: $entries)) {
-                        Image(systemName: "minus.circle.fill")
+                    NavigationLink(destination: NewEntry(budget: $budget, withdrawals: $withdrawals, deposits: $deposits, isExpense: .constant(false), entries: $entries)) {
+                        Image(systemName: "plus.circle.fill")
                             .font(.system(size: 50))
                             .foregroundColor(.green)
                     }
