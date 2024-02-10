@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Financy
-//
-//  Created by Adriana Zambrano on 1/27/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {

@@ -1,10 +1,3 @@
-//
-//  Investments.swift
-//  Financy
-//
-//  Created by Adriana Zambrano on 1/28/24.
-//
-
 import SwiftUI
 
 struct Investments: View {

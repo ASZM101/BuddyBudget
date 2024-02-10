@@ -1,10 +1,3 @@
-//
-//  WebView.swift
-//  Financy
-//
-//  Created by Adriana Zambrano on 1/28/24.
-//
-
 import Foundation
 import SwiftUI
 import WebKit
