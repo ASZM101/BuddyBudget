@@ -13,12 +13,17 @@ We used Swift UI to build a simple yet powerful and visually appealing frontend 
 In the future of **BuddyBudget**, we hope to make this highly useful tool available to a wider range of platforms, as well as expand our learning hub by writing more articles and creating more quizzes.
 
 ## 👨‍💻 How to Run 👨‍💻
-Requirements:
+
+### Requirements:
 
 - MacOS version >= 13.5.1
 - Xcode version >= 15.0
 - `rustc` version >= 1.74.1
 - `cargo` version >= 1.74.1
 
-Install and run the XCode project. Then, in a separate folder, start the Rocket server.
+### Building:
+
+1. Install and run the Xcode project.
+2. Download dependents using `cargo c`
+3. Then, in a separate folder, start the Rocket server in the development environment by running `cargo run`
 
