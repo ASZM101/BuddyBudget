@@ -63,11 +63,15 @@ struct Login: View {
                     .background(Color("lightGrey"))
                     .cornerRadius(20)
                     .padding()
+                    .padding(.leading)
+                    .padding(.trailing)
                 TextField("Password", text: $password)
                     .padding()
                     .background(Color("lightGrey"))
                     .cornerRadius(20)
                     .padding()
+                    .padding(.leading)
+                    .padding(.trailing)
                 NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), isActive: $loggedIn) {
                     Button {
                         print("preparing to handle button click")

@@ -24,11 +24,15 @@ struct NewEntry: View {
                     .background(Color(dBkgd))
                     .cornerRadius(20)
                     .padding()
+                    .padding(.leading)
+                    .padding(.trailing)
                 TextField("Amount", text: $amountStr)
                     .padding()
                     .background(Color(aBkgd))
                     .cornerRadius(20)
                     .padding()
+                    .padding(.leading)
+                    .padding(.trailing)
                     .keyboardType(.decimalPad)
                     Button{
                         amount = Double(amountStr) ?? 0.0
