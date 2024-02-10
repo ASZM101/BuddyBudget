@@ -1266,7 +1266,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "tamuhack2024"
+name = "BuddyBudget"
 version = "0.1.0"
 dependencies = [
  "async-trait",
