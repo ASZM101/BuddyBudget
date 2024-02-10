@@ -8,27 +8,27 @@ struct Quiz2: View {
     @State var next2 = false
     @State var next3 = false
     
-    //State variables to provide user with feedback
+    // State variables to provide user with feedback
     @State var wrongFeedback = "You Can Do It!"
     @State var correctFeedback = "You Aced It!"
     
-    //Empty state variables to temporarily store current questions and answers
+    // Empty state variables to temporarily store current questions and answers
     @State var questionsTemp = [String]()
     @State var answersQ0Temp = [String]()
     @State var answersQ1Temp = [String]()
     @State var answersQ2Temp = [String]()
     
-    //State variables to determine quiz accuracy of user
+    // State variables to determine quiz accuracy of user
     @State var correctCount = 0
     @State var qsAnswered = 0
     
-    //State variables to store investments questions and answers
+    // State variables to store investments questions and answers
     @State var questions = ["What is a share?", "What is a fractional share?", "What is a dividend?"]
     @State var answersQ0 = ["A part of a company", "Money that you receive from owning stock in a company", "The profit that you earn from selling stocks", "A share that you buy that is a fraction"]
     @State var answersQ1 = ["The percent of the company that you own", "The fraction of money that is taken in capital gains tax when you sell a stock", "A share that you buy that is a fraction", "Another word for 'index fund'"]
     @State var answersQ2 = ["The amount of money a company pays you for owning a share", "The fraction of a company that you own by owning a share", "A tax that is paid on sold shares", "The business that you own a share of"]
     
-    //State variables for facilitate displaying of questions and checking answers
+    // State variables for facilitate displaying of questions and checking answers
     @State var qNum = 0
     @State var aNum = 0
     @State var answer1 = ""
@@ -53,7 +53,7 @@ struct Quiz2: View {
             
             ZStack {
                 
-                //View for question 1
+                // View for question 1
                 if !next2 {
                     
                     HStack(alignment: .center, spacing: 20) {
@@ -63,7 +63,7 @@ struct Quiz2: View {
                             
                             Spacer()
                             VStack {
-                                //Displays question
+                                // Displays question
                                 Text("\(question1)")
                                     .font(.system(size: 25))
                                     .multilineTextAlignment(.center)
@@ -71,7 +71,7 @@ struct Quiz2: View {
                             .frame(maxWidth: .infinity)
                             Spacer()
                             
-                            //Displays answer and determines whether it is correct if user selects it
+                            // Displays answer and determines whether it is correct if user selects it
                             Button("\(answer1)") {
                                 if answer1 == "A part of a company" || answer1 == "A share that you buy that is a fraction" || answer1 == "The amount of money a company pays you for owning a share" {
                                     correct1 = true
@@ -104,7 +104,7 @@ struct Quiz2: View {
                             .cornerRadius(30)
                             .shadow(color: correct1 ? Color("A2A4A4") : Color("FFFFFF"), radius: 10, x: 0, y: 5)
                             
-                            //Displays answer and determines whether it is correct if user selects it
+                            // Displays answer and determines whether it is correct if user selects it
                             Button("\(answer2)") {
                                 if answer2 == "A part of a company" || answer2 == "A share that you buy that is a fraction" || answer2 == "The amount of money a company pays you for owning a share" {
                                     correct2 = true
@@ -137,7 +137,7 @@ struct Quiz2: View {
                             .cornerRadius(30)
                             .shadow(color: correct2 ? Color("A2A4A4") : Color("FFFFFF"), radius: 10, x: 0, y: 5)
                             
-                            //Displays answer and determines whether it is correct if user selects it
+                            // Displays answer and determines whether it is correct if user selects it
                             Button("\(answer3)") {
                                 if answer3 == "A part of a company" || answer3 == "A share that you buy that is a fraction" || answer3 == "The amount of money a company pays you for owning a share" {
                                     correct3 = true
@@ -170,7 +170,7 @@ struct Quiz2: View {
                             .cornerRadius(30)
                             .shadow(color: correct3 ? Color("A2A4A4") : Color("FFFFFF"), radius: 10, x: 0, y: 5)
                             
-                            //Displays answer and determines whether it is correct if user selects it
+                            // Displays answer and determines whether it is correct if user selects it
                             Button("\(answer4)") {
                                 if answer4 == "A part of a company" || answer4 == "A share that you buy that is a fraction" || answer4 == "The amount of money a company pays you for owning a share" {
                                     correct4 = true
@@ -246,7 +246,7 @@ struct Quiz2: View {
                         Spacer()
                     }
                     .frame(width: 400)
-                    .task { //Determines which answers and questions to display
+                    .task { // Determines which answers and questions to display
                         
                         qNum = Int.random(in: 0..<questions.count)
                         aNum = Int.random(in: 0..<answersQ0.count)
@@ -306,7 +306,7 @@ struct Quiz2: View {
                     }
                 } else {
                     
-                    //View for question 2
+                    // View for question 2
                     if !next3 {
                         
                         HStack(alignment: .center, spacing: 20) {
@@ -317,7 +317,7 @@ struct Quiz2: View {
                                 
                                 Spacer()
                                 VStack {
-                                    //Displays question
+                                    // Displays question
                                     Text("\(question2)")
                                         .font(.system(size: 25))
                                         .multilineTextAlignment(.center)
@@ -325,7 +325,7 @@ struct Quiz2: View {
                                 .frame(maxWidth: .infinity)
                                 Spacer()
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer1)") {
                                     if answer1 == "A part of a company" || answer1 == "A share that you buy that is a fraction" || answer1 == "The amount of money a company pays you for owning a share" {
                                         correct1 = true
@@ -357,7 +357,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct1 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer2)") {
                                     if answer2 == "A part of a company" || answer2 == "A share that you buy that is a fraction" || answer2 == "The amount of money a company pays you for owning a share" {
                                         correct2 = true
@@ -389,7 +389,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct2 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer3)") {
                                     if answer3 == "A part of a company" || answer3 == "A share that you buy that is a fraction" || answer3 == "The amount of money a company pays you for owning a share" {
                                         correct3 = true
@@ -421,7 +421,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct3 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer4)") {
                                     if answer4 == "A part of a company" || answer4 == "A share that you buy that is a fraction" || answer4 == "The amount of money a company pays you for owning a share" {
                                         correct4 = true
@@ -495,7 +495,7 @@ struct Quiz2: View {
                             Spacer()
                         }
                         .frame(width: 400)
-                        .task { //Determines which answers and questions to display
+                        .task { // Determines which answers and questions to display
                             
                             answer1 = ""
                             answer2 = ""
@@ -574,7 +574,7 @@ struct Quiz2: View {
                         }
                         .transition(.move(edge: .trailing))
                         .zIndex(2)
-                    } else { //View for question 3
+                    } else { // View for question 3
                         
                         HStack(alignment: .center, spacing: 20) {
                             
@@ -584,7 +584,7 @@ struct Quiz2: View {
                                 
                                 Spacer()
                                 VStack {
-                                    //Displays question
+                                    // Displays question
                                     Text("\(question3)")
                                         .font(.system(size: 25))
                                         .multilineTextAlignment(.center)
@@ -592,7 +592,7 @@ struct Quiz2: View {
                                 .frame(maxWidth: .infinity)
                                 Spacer()
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer1)") {
                                     if answer1 == "A part of a company" || answer1 == "A share that you buy that is a fraction" || answer1 == "The amount of money a company pays you for owning a share" {
                                         correct1 = true
@@ -626,7 +626,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct1 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer2)") {
                                     if answer2 == "A part of a company" || answer2 == "A share that you buy that is a fraction" || answer2 == "The amount of money a company pays you for owning a share" {
                                         correct2 = true
@@ -660,7 +660,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct2 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer3)") {
                                     if answer3 == "A part of a company" || answer3 == "A share that you buy that is a fraction" || answer3 == "The amount of money a company pays you for owning a share" {
                                         correct3 = true
@@ -694,7 +694,7 @@ struct Quiz2: View {
                                 .cornerRadius(30)
                                 .shadow(color: Color(correct3 ? "A2A4A4" : "FFFFFF"), radius: 10, x: 0, y: 5)
                                 
-                                //Displays answer and determines whether it is correct if user selects it
+                                // Displays answer and determines whether it is correct if user selects it
                                 Button("\(answer4)") {
                                     if answer4 == "A part of a company" || answer4 == "A share that you buy that is a fraction" || answer4 == "The amount of money a company pays you for owning a share" {
                                         correct4 = true
@@ -768,7 +768,7 @@ struct Quiz2: View {
                             Spacer()
                         }
                         .frame(width: 400)
-                        .task { //Determines which answers and questions to display //Determines which answers and questions to display
+                        .task { // Determines which answers and questions to display // Determines which answers and questions to display
                             
                             correct1 = false
                             correct2 = false
