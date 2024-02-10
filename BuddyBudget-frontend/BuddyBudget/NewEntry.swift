@@ -82,7 +82,7 @@ struct NewEntry: View {
                         }
                         
                         // Append the entry to the entries array
-                        entries.append((isExpense ? "- $" : "+ $") + String(amount) + " (01/28/2024) " + description)
+                        entries.append((isExpense ? "- $" : "+ $") + String(format: "%.2f", round(amount * 100) / 100.0) + " (Date) " + description)
                         
                         // Adjust the amount for expenses (negative)
                         var am = amount;

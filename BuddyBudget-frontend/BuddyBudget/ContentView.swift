@@ -1,5 +1,36 @@
 import SwiftUI
 
+// Custom progress view style with gradient fill and stroke
+struct CustomProgressStyle<Stroke: ShapeStyle, Background: ShapeStyle>: ProgressViewStyle {
+    var stroke: Stroke
+    var fill: Background
+    var cornerRadius: CGFloat = 10
+    var height: CGFloat = 20
+    
+    // Creates the body of the progress view
+    func makeBody(configuration: Configuration) -> some View {
+        let fractionCompleted = configuration.fractionCompleted ?? 0
+        
+        return VStack {
+            ZStack(alignment: .topLeading) {
+                GeometryReader { geo in
+                    // Rectangle representing the progress
+                    Rectangle()
+                        .fill(fill)
+                        .frame(maxWidth: geo.size.width * CGFloat(fractionCompleted))
+                }
+            }
+            .frame(height: height)
+            .cornerRadius(cornerRadius)
+            .overlay(
+                // Overlay a stroke on the progress
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(stroke, lineWidth: 2)
+            )
+        }
+    }
+}
+
 struct ContentView: View {
     // Create an instance of the shared APIManager
     let apiManager = APIManager.shared
@@ -17,7 +48,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 // Display balance and fetch transactions on view appear
-                Text("Balance: $" + String(String(format: "%.2f", round(budget * 100) / 100.0)))
+                Text("Balance: $" + String(format: "%.2f", round(budget * 100) / 100.0))
                     .font(.largeTitle.weight(.bold))
                     .multilineTextAlignment(.center)
                     .padding()
@@ -27,8 +58,7 @@ struct ContentView: View {
                         apiManager.get_transactions {
                             transactions in
                             
-                            //formatted as
-                            //+/- $[amount] (MM/DD/YYYY) [reason]
+                            // Entries formatted as +/- $[amount] (MM/DD/YYYY) [description]
                             entries = [""]
                             withdrawals = 0
                             deposits = 0
@@ -43,23 +73,32 @@ struct ContentView: View {
                                 }
                                 let timestamp = TimeInterval(transaction.timestamp)
                                 let converted = apiManager.as_converted(timestamp: timestamp, format: "MM/dd/yyyy")
-                                entry.append("\(abs(transaction.amount)) (\(converted)) \(transaction.name)")
+                                entry.append("\(String(format: "%.2f", round(abs(transaction.amount) * 100) / 100.0)) (\(converted)) \(transaction.name)")
                                 entries.append(entry)
                             }
                             budget = deposits - withdrawals
                         }
                     }
                 
-                // Display progress bar, withdrawn and deposited amounts
-                ProgressView(value: withdrawals, total: deposits)
-                    .progressViewStyle(.linear)
-                    .padding()
-                    .tint(.yellow)
+                // Display custom progress bar using CustomoProgressStyle
+                let customStyle = CustomProgressStyle(
+                    stroke: Color.yellow,
+                    fill: Color.yellow
+                )
+                VStack {
+                    // Customized progress view, withdrawn and deposited amounts
+                    ProgressView(value: withdrawals / deposits)
+                        .padding()
+                        .progressViewStyle(customStyle)
+                }
+                .padding()
+                .frame(maxWidth: 400)
+                .tint(.yellow)
                 HStack {
-                    Text("$" + String(String(format: "%.2f", round(withdrawals * 100) / 100.0)) + "\nwithdrawn")
+                    Text("$" + String(format: "%.2f", round(withdrawals * 100) / 100.0) + "\nwithdrawn")
                         .font(.title3.weight(.semibold))
                     Spacer()
-                    Text("$" + String(String(format: "%.2f", round(deposits * 100) / 100.0)) + "\ndeposited")
+                    Text("$" + String(format: "%.2f", round(deposits * 100) / 100.0) + "\ndeposited")
                         .font(.title3.weight(.semibold))
                 }
                 .padding()
