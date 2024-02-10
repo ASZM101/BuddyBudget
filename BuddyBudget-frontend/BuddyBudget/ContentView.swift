@@ -117,6 +117,7 @@ struct ContentView: View {
                 }
                 .padding()
             }
+            .padding()
             .onAppear() {
                 budget = deposits - withdrawals
             }

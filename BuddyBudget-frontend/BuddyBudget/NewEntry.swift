@@ -19,6 +19,8 @@ struct NewEntry: View {
                 Text("New Entry")
                     .font(.largeTitle.weight(.bold))
                     .padding()
+                Spacer()
+                    .frame(maxHeight: 75)
                 TextField("Description", text: $description)
                     .padding()
                     .background(Color(dBkgd))
@@ -34,6 +36,8 @@ struct NewEntry: View {
                     .padding(.leading)
                     .padding(.trailing)
                     .keyboardType(.decimalPad)
+                Spacer()
+                    .frame(maxHeight: 25)
                     Button{
                         amount = Double(amountStr) ?? 0.0
                         if(description == "") {
@@ -76,7 +80,9 @@ struct NewEntry: View {
                         .background(.blue)
                         .foregroundColor(.white)
                         .clipShape(.capsule)
+                        .padding()
                 Spacer()
+                    .frame(maxHeight: 25)
             }
         }
     }
